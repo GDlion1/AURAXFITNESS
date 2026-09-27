@@ -103,10 +103,10 @@ const ASSETS = {
       tag: 'Zone 05'
     },
     {
-      title: '06 — Cold Plunge & Ice Tub (3rd Floor)',
+      title: '06 — Cold Plunge & Ice Suite',
       desc: 'Dedicated commercial cold plunge ice tubs located on the 3rd Floor for elite post-workout athletic recovery, soreness relief, and rapid muscle restoration.',
       image: '/images/gym/image.png',
-      tag: '3rd Floor · Zone 06'
+      tag: 'Zone 06'
     }
   ]
 };
@@ -130,24 +130,28 @@ const trainers = [
     name: 'Vasanth Kumar',
     role: 'Head Coach',
     image: '/images/trainer_img/Vasanth.png',
+    pos: 'center 75%',
     instagram: 'https://www.instagram.com/vasanth_kumarvk?stkn=MWIweWg1MTY2aHlkdw=='
   },
   {
     name: 'Praveen',
     role: 'Strength Trainer',
     image: '/images/trainer_img/Praveen.png',
+    pos: 'center 20%',
     instagram: 'https://www.instagram.com/__.praveen.__25?stkn=MThrb2ZvcGZ3eDFscA=='
   },
   {
     name: 'Charan',
     role: 'Gym Trainer',
     image: '/images/trainer_img/Charan.PNG',
+    pos: 'center 20%',
     instagram: 'https://www.instagram.com/charan___6767?stkn=azhvYWw5M3huNW1k=='
   },
   {
     name: 'Angela',
     role: 'Zumba Instructor',
     image: '/images/trainer_img/Zumba.png',
+    pos: 'center 25%',
     instagram: '#'
   }
 ];
@@ -276,12 +280,6 @@ function Hero({ onNavigate }) {
       <div className="hero-container">
         <div className="hero-content">
           <div className="hero-brand-pill">
-            <img
-              src="/images/logo/aurax-emblem-transparent.png"
-              alt="AURA X Crest"
-              className="hero-brand-crest"
-            />
-            <span className="hero-brand-sep" />
             <span className="hero-brand-text">AURA X FITNESS • LALBAGH</span>
           </div>
           <h1 key={idx}>{SLOGANS[idx]}</h1>
@@ -382,7 +380,7 @@ function About() {
             />
             <div className="about-caption">
               <span className="caption-tag">{spot.tag}</span>
-              <h4>{spot.name}</h4>
+              <h3>{spot.name}</h3>
               <p>{spot.desc}</p>
             </div>
             <div className="image-badge">
@@ -574,7 +572,7 @@ function Membership({ onNavigate }) {
               href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent('Hi AURA X FITNESS, I would like to enquire about the Regular membership.')}`}
               target="_blank"
               rel="noreferrer"
-              className="button black"
+              className="button"
             >
               Enquire now <Icon name="arrow" size={18} />
             </a>
@@ -594,7 +592,10 @@ function Membership({ onNavigate }) {
                   Train smart.<br />
                   Spend smarter.
                 </h3>
-                <p className="student-intro">Unlock our student rate with a quick eligibility form.</p>
+                <div className="price student-card-price">
+                  <sup>₹</sup>9,999<small>12 months • student discount rate</small>
+                </div>
+                <p className="student-intro">Verify student eligibility below to claim your discounted rate.</p>
                 <form onSubmit={submit}>
                   <label>
                     <span>Full name</span>
@@ -710,7 +711,12 @@ function Teams() {
         <div className="trainer-grid">
           {trainers.map((t, i) => (
             <article className="trainer" key={t.name}>
-              <img src={t.image} alt={`${t.name}, ${t.role}`} loading="lazy" />
+              <img
+                src={t.image}
+                alt={`${t.name}, ${t.role}`}
+                loading="lazy"
+                style={{ objectPosition: t.pos || 'center 35%' }}
+              />
               <div className="trainer-info">
                 <div className="trainer-meta">
                   <span>0{i + 1}</span>
@@ -817,21 +823,21 @@ function RecoveryComingSoon() {
               <div className="recovery-item">
                 <span className="rec-icon">❄️</span>
                 <div>
-                  <h4>Dedicated Cold Plunge Ice Tubs</h4>
+                  <h3>Dedicated Cold Plunge Ice Tubs</h3>
                   <p>Commercial chilled ice tubs maintained at optimal athletic recovery temperatures (39°F / 4°C).</p>
                 </div>
               </div>
               <div className="recovery-item">
                 <span className="rec-icon">⚡</span>
                 <div>
-                  <h4>Anti-Inflammatory Muscle Repair</h4>
+                  <h3>Anti-Inflammatory Muscle Repair</h3>
                   <p>Flushes lactic acid buildup, drastically reduces post-leg day DOMS, and resets your central nervous system.</p>
                 </div>
               </div>
               <div className="recovery-item">
                 <span className="rec-icon">📍</span>
                 <div>
-                  <h4>Exclusive 3rd Floor Sanctuary</h4>
+                  <h3>Exclusive 3rd Floor Sanctuary</h3>
                   <p>A quiet, focused athletic recovery suite situated on the 3rd Floor, Vijaya Arcade.</p>
                 </div>
               </div>
@@ -862,16 +868,23 @@ function Contact() {
           </h2>
           <p className="contact-desc">Come in, look around, and feel the Aura difference.</p>
           <div className="contact-details">
-            <a href="tel:+917899888543" className="contact-card">
+            <div className="contact-card">
               <div className="contact-icon">
                 <Icon name="phone" size={20} />
               </div>
               <div className="contact-info">
                 <span className="contact-tag">Call Us</span>
-                <span className="contact-value">{CONTACT.phones[0]}</span>
-                <span className="contact-value">{CONTACT.phones[1]}</span>
+                <div className="contact-phone-group">
+                  <a href={`tel:${CONTACT.phones[0].replace(/\s+/g, '')}`} className="contact-phone-link">
+                    {CONTACT.phones[0]}
+                  </a>
+                  <span className="phone-dot-sep">•</span>
+                  <a href={`tel:${CONTACT.phones[1].replace(/\s+/g, '')}`} className="contact-phone-link">
+                    {CONTACT.phones[1]}
+                  </a>
+                </div>
               </div>
-            </a>
+            </div>
             <a href={CONTACT.maps} target="_blank" rel="noreferrer" className="contact-card">
               <div className="contact-icon">
                 <Icon name="pin" size={20} />
