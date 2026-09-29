@@ -1121,6 +1121,34 @@ h1, h2, h3, h4 {
   margin: -10px 0 20px;
 }
 
+.student-locked-box {
+  margin: 14px 0 22px;
+  padding: 16px 18px;
+  background: rgba(242, 210, 29, 0.04);
+  border: 1px dashed rgba(242, 210, 29, 0.28);
+  border-radius: var(--radius);
+}
+
+.locked-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--yellow);
+  margin-bottom: 8px;
+}
+
+.student-locked-box .student-intro {
+  margin: 0;
+  font-size: 13px;
+  color: #c1bfb7;
+  line-height: 1.55;
+}
+
 .student form {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -592,10 +592,12 @@ function Membership({ onNavigate }) {
                   Train smart.<br />
                   Spend smarter.
                 </h3>
-                <div className="price student-card-price">
-                  <sup>₹</sup>9,999<small>12 months • student discount rate</small>
+                <div className="student-locked-box">
+                  <div className="locked-badge-pill">
+                    <span className="lock-icon">🔒</span> Exclusive Rate Locked
+                  </div>
+                  <p className="student-intro">Enter all your details and upload your student ID photo below to reveal your discounted rate.</p>
                 </div>
-                <p className="student-intro">Verify student eligibility below to claim your discounted rate.</p>
                 <form onSubmit={submit}>
                   <label>
                     <span>Full name</span>
@@ -658,7 +660,7 @@ function Membership({ onNavigate }) {
                         <span className="spinner" /> Reviewing...
                       </span>
                     ) : (
-                      <>Unlock my student rate <Icon name="arrow" size={18} /></>
+                      <>Unlock & Reveal Rate <Icon name="arrow" size={18} /></>
                     )}
                   </button>
                 </form>
@@ -672,7 +674,7 @@ function Membership({ onNavigate }) {
                   Welcome to<br />the <em>inside.</em>
                 </h3>
                 <div className="price">
-                  <sup>₹</sup>9,999<small>12 months · first 50 students</small>
+                  <sup>₹</sup>9,999<small>12 months • student discount rate</small>
                 </div>
                 <a
                   href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(`Hi AURA X FITNESS, I have unlocked the Student membership (${form.name || ''} from ${form.college || ''}) and would like to join.`)}`}
