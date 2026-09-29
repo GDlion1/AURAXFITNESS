@@ -553,26 +553,28 @@ function Membership({ onNavigate }) {
               <span>01 / Regular</span>
               <b>Yearly membership</b>
             </div>
-            <h3>
-              Full access.<br />
-              Full force.
-            </h3>
-            <ul>
-              {['12 months of gym access', 'Premium training floor', 'First 50 member offer', 'AURA X FITNESS community'].map((x) => (
-                <li key={x}>
-                  <span className="icon-wrap"><Icon name="check" size={15} /></span>
-                  <span>{x}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="price">
-              <sup>₹</sup>11,111<small>one annual payment</small>
+            <div className="plan-content-wrap">
+              <h3>
+                Full access.<br />
+                Full force.
+              </h3>
+              <ul>
+                {['12 months of gym access', 'Premium training floor', 'First 50 member offer', 'AURA X FITNESS community'].map((x) => (
+                  <li key={x}>
+                    <span className="icon-wrap"><Icon name="check" size={15} /></span>
+                    <span>{x}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="price">
+                <sup>₹</sup>11,111<small>one annual payment</small>
+              </div>
             </div>
             <a
               href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent('Hi AURA X FITNESS, I would like to enquire about the Regular membership.')}`}
               target="_blank"
               rel="noreferrer"
-              className="button"
+              className="button black plan-btn"
             >
               Enquire now <Icon name="arrow" size={18} />
             </a>
@@ -587,106 +589,112 @@ function Membership({ onNavigate }) {
               <b>Student exclusive</b>
             </div>
             {!submitted ? (
-              <>
-                <h3>
-                  Train smart.<br />
-                  Spend smarter.
-                </h3>
-                <div className="student-locked-box">
-                  <div className="locked-badge-pill">
-                    <span className="lock-icon">🔒</span> Exclusive Rate Locked
+              <form onSubmit={submit} className="plan-form-wrap">
+                <div className="plan-content-wrap">
+                  <h3>
+                    Train smart.<br />
+                    Spend smarter.
+                  </h3>
+                  <div className="student-locked-box">
+                    <div className="locked-badge-pill">
+                      <span className="lock-icon">🔒</span> Exclusive Rate Locked
+                    </div>
+                    <p className="student-intro">Enter all your details and upload your student ID photo below to reveal your discounted rate.</p>
                   </div>
-                  <p className="student-intro">Enter all your details and upload your student ID photo below to reveal your discounted rate.</p>
-                </div>
-                <form onSubmit={submit}>
-                  <label>
-                    <span>Full name</span>
-                    <input
-                      required
-                      placeholder="Enter your name"
-                      value={form.name || ''}
-                      disabled={loading}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    />
-                  </label>
-                  <label>
-                    <span>College name</span>
-                    <input
-                      required
-                      placeholder="Enter college or university"
-                      value={form.college || ''}
-                      disabled={loading}
-                      onChange={(e) => setForm({ ...form, college: e.target.value })}
-                    />
-                  </label>
-                  <label>
-                    <span>Personal email</span>
-                    <input
-                      type="email"
-                      required
-                      placeholder="name@example.com"
-                      value={form.email || ''}
-                      disabled={loading}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    />
-                  </label>
-                  <label>
-                    <span>Phone number</span>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+91 98765 43210"
-                      value={form.phone || ''}
-                      disabled={loading}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    />
-                  </label>
-                  <label className="file-input">
-                    <input
-                      type="file"
-                      accept="image/*,.pdf"
-                      required
-                      disabled={loading}
-                      onChange={handleFileChange}
-                    />
-                    <Icon name="upload" size={17} />
-                    <span className="file-name-display" title={fileName || 'Upload student ID card'}>
-                      {fileName ? truncateFileName(fileName, 24) : 'Upload student ID card'}
-                    </span>
-                  </label>
-                  <button className="button" type="submit" disabled={loading}>
-                    {loading ? (
-                      <span className="btn-loading">
-                        <span className="spinner" /> Reviewing...
+                  <div className="student-fields-grid">
+                    <label>
+                      <span>Full name</span>
+                      <input
+                        required
+                        placeholder="Enter your name"
+                        value={form.name || ''}
+                        disabled={loading}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      />
+                    </label>
+                    <label>
+                      <span>College name</span>
+                      <input
+                        required
+                        placeholder="Enter college or university"
+                        value={form.college || ''}
+                        disabled={loading}
+                        onChange={(e) => setForm({ ...form, college: e.target.value })}
+                      />
+                    </label>
+                    <label>
+                      <span>Personal email</span>
+                      <input
+                        type="email"
+                        required
+                        placeholder="name@example.com"
+                        value={form.email || ''}
+                        disabled={loading}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      />
+                    </label>
+                    <label>
+                      <span>Phone number</span>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="+91 98765 43210"
+                        value={form.phone || ''}
+                        disabled={loading}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      />
+                    </label>
+                    <label className="file-input">
+                      <input
+                        type="file"
+                        accept="image/*,.pdf"
+                        required
+                        disabled={loading}
+                        onChange={handleFileChange}
+                      />
+                      <Icon name="upload" size={17} />
+                      <span className="file-name-display" title={fileName || 'Upload student ID card'}>
+                        {fileName ? truncateFileName(fileName, 24) : 'Upload student ID card'}
                       </span>
-                    ) : (
-                      <>Unlock & Reveal Rate <Icon name="arrow" size={18} /></>
-                    )}
-                  </button>
-                </form>
-                <small className="demo-note">Your ID and information are securely encrypted and verified with AURA X FITNESS.</small>
-              </>
-            ) : (
-              <div className="reveal">
-                <div className="spark">✦</div>
-                <p className="eyebrow">Your student rate is unlocked</p>
-                <h3>
-                  Welcome to<br />the <em>inside.</em>
-                </h3>
-                <div className="price">
-                  <sup>₹</sup>9,999<small>12 months • student discount rate</small>
+                    </label>
+                  </div>
+                  <small className="demo-note">Your ID and information are securely encrypted and verified with AURA X FITNESS.</small>
                 </div>
-                <a
-                  href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(`Hi AURA X FITNESS, I have unlocked the Student membership (${form.name || ''} from ${form.college || ''}) and would like to join.`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="button black"
-                >
-                  Join via WhatsApp <Icon name="arrow" size={18} />
-                </a>
-                <button className="reset" type="button" onClick={() => setSubmitted(false)}>
-                  Edit details
+                <button className="button plan-btn" type="submit" disabled={loading}>
+                  {loading ? (
+                    <span className="btn-loading">
+                      <span className="spinner" /> Reviewing...
+                    </span>
+                  ) : (
+                    <>Unlock & Reveal Rate <Icon name="arrow" size={18} /></>
+                  )}
                 </button>
+              </form>
+            ) : (
+              <div className="reveal-content-wrap">
+                <div className="plan-content-wrap reveal">
+                  <div className="spark">✦</div>
+                  <p className="eyebrow">Your student rate is unlocked</p>
+                  <h3>
+                    Welcome to<br />the <em>inside.</em>
+                  </h3>
+                  <div className="price">
+                    <sup>₹</sup>9,999<small>12 months • student discount rate</small>
+                  </div>
+                </div>
+                <div className="reveal-bottom-actions">
+                  <a
+                    href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(`Hi AURA X FITNESS, I have unlocked the Student membership (${form.name || ''} from ${form.college || ''}) and would like to join.`)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="button black plan-btn"
+                  >
+                    Join via WhatsApp <Icon name="arrow" size={18} />
+                  </a>
+                  <button className="reset" type="button" onClick={() => setSubmitted(false)}>
+                    Edit details
+                  </button>
+                </div>
               </div>
             )}
           </article>
@@ -765,7 +773,6 @@ function Facility() {
             <article className="gallery-card" key={item.title}>
               <div className="gallery-media">
                 <img src={item.image} alt={item.title} loading="lazy" />
-                <span className="card-tag">{item.tag}</span>
               </div>
               <div className="gallery-overlay">
                 <h3>{item.title}</h3>
@@ -914,10 +921,10 @@ function Contact() {
               src="https://maps.google.com/maps?q=AURA%20X%20FITNESS%2C%20Lal%20Bagh%20Main%20Rd%2C%20Bengaluru%2C%2012.9605123%2C77.5877014&t=&z=17&ie=UTF8&iwloc=B&output=embed"
               loading="lazy"
             />
-            <a href={CONTACT.maps} target="_blank" rel="noreferrer" className="map-link">
-              Open in Google Maps <Icon name="arrow" size={16} />
-            </a>
           </div>
+          <a href={CONTACT.maps} target="_blank" rel="noreferrer" className="map-link">
+            Open in Google Maps <Icon name="arrow" size={16} />
+          </a>
         </div>
       </div>
     </section>
@@ -1315,7 +1322,7 @@ function DayPassPage({ onBack }) {
                         value={visitDate}
                         onClick={(e) => {
                           if (e.target.showPicker) {
-                            try { e.target.showPicker(); } catch (err) {}
+                            try { e.target.showPicker(); } catch (err) { }
                           }
                         }}
                         onChange={(e) => {

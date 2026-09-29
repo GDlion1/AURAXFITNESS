@@ -1,17 +1,43 @@
-/* Issue #1 — consolidated to 4 font families: removed Cabinet Grotesk (was unused except one nav rule). */
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap');
+/* Issues #1, #2, #3, #4 — Design System Tokens */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap');
 
 :root {
+  /* Issue #1 — Standardized 3 Font Families */
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Oswald', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Issue #2 — Standardized Modular Type Scale (8 tokens) */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-md: 18px;
+  --fs-lg: 24px;
+  --fs-xl: 32px;
+  --fs-2xl: 44px;
+  --fs-3xl: 60px;
+
+  /* Issue #3 — Unified Text & Surface Color Palette (9 tokens) */
   --ink: #11110f;
   --charcoal: #1a1a17;
-  --card-dark: #242420;
+  --card-dark: #1e1e1a;
   --cream: #f4f1ea;
   --yellow: #f2d21d;
   --yellow-hover: #ffe539;
   --yellow-dark: #a88500;
+  --text-muted-dark: #a8a69e;
+  --text-muted-light: #737169;
   --muted: #8d8c83;
+  --border-dark: rgba(255, 255, 255, 0.08);
+
+  /* Issue #4 — Standardized Border Radii System (4 tokens) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --radius: var(--radius-md);
+
   --nav-h: 76px;
-  --radius: 6px;
 }
 
 *, *::before, *::after {
@@ -28,8 +54,8 @@ body {
   padding: 0;
   background: var(--cream);
   color: var(--ink);
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 15px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -48,26 +74,31 @@ img {
 }
 
 /* Base Headings & Eyebrows */
-/* Issues #6, #8, #9, #11 — long all-caps headings.
-   h1/h2 keep uppercase (brand voice) but we compensate readability via
-   letter-spacing and line-height tweaks below per-element.
-   h3/h4 switch to Title Case in CSS (capitalize vs uppercase).
-*/
-h1, h2, h3, h4 {
+/* Issues #6, #8, #9, #10 — Standardized heading transformations */
+h1, h2 {
   margin: 0;
-  font-family: 'Oswald', sans-serif;
+  font-family: var(--font-heading);
   text-transform: uppercase;
   line-height: 1.1;
   letter-spacing: 0.01em;
   word-break: break-word;
 }
 
-/* Issue #7, #10 — eyebrow was 11px; bumped to 12px minimum. */
+h3, h4 {
+  margin: 0;
+  font-family: var(--font-heading);
+  text-transform: none;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  word-break: break-word;
+}
+
+/* Issue #7 — Eyebrow label readability */
 .eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0 0 16px;
   display: block;
@@ -85,10 +116,10 @@ h1, h2, h3, h4 {
   background: var(--yellow);
   color: var(--ink);
   padding: 13px 22px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: none;
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
@@ -106,7 +137,6 @@ h1, h2, h3, h4 {
   transform: translateY(0);
 }
 
-/* Issue #30 — nav-cta styled as ghost/outline button so hero CTA remains primary */
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -116,9 +146,9 @@ h1, h2, h3, h4 {
   color: var(--yellow);
   border: 1.5px solid var(--yellow);
   padding: 10px 18px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   border-radius: var(--radius);
   cursor: pointer;
@@ -143,11 +173,12 @@ h1, h2, h3, h4 {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Issue #11 — Body text minimum font size bump (11px -> 13px) */
 .text-link {
-  font-size: 11px;
-  font-weight: 800;
+  font-size: var(--fs-sm);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -839,11 +870,10 @@ h1, h2, h3, h4 {
 /* Membership Section */
 .section-heading {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 28px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 40px;
 }
 
 .section-heading .yellow {
@@ -851,10 +881,10 @@ h1, h2, h3, h4 {
 }
 
 .section-heading > p {
-  max-width: 320px;
-  color: #a8a69e;
-  line-height: 1.7;
-  font-size: 14px;
+  max-width: 520px;
+  color: var(--text-muted-dark);
+  line-height: 1.65;
+  font-size: var(--fs-base);
   margin: 0;
 }
 
@@ -866,20 +896,34 @@ h1, h2, h3, h4 {
 }
 
 .plan {
-  padding: clamp(28px, 4vw, 48px);
-  border-radius: var(--radius);
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.4s ease, color 0.4s ease;
 }
 
+.plan-content-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Regular Card — Strong Yellow Background */
 .regular {
   position: relative;
   overflow: hidden;
   background: var(--yellow);
   color: var(--ink);
-  box-shadow: 0 15px 35px rgba(242, 210, 29, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 35px rgba(242, 210, 29, 0.25);
+}
+
+.regular:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(242, 210, 29, 0.4);
 }
 
 .plan > *:not(.plan-brand-watermark) {
@@ -910,13 +954,15 @@ h1, h2, h3, h4 {
   display: block;
 }
 
+/* Student Card (Default: Dark Card) */
 .student {
   position: relative;
   overflow: hidden;
   background: var(--card-dark);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.4s ease, color 0.4s ease;
 }
 
 .student:hover {
@@ -927,12 +973,25 @@ h1, h2, h3, h4 {
 
 .student-watermark {
   filter: brightness(10) drop-shadow(0 0 14px rgba(255, 255, 255, 0.2));
-  opacity: 0.06;
+  opacity: 0.08;
 }
 
 .student:hover .student-watermark {
   opacity: 0.17;
   transform: translateY(-5px) scale(1.05) rotate(-2deg);
+}
+
+/* Student Card (Revealed: Transforms to Strong Yellow!) */
+.student.revealed {
+  background: var(--yellow);
+  color: var(--ink);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 35px rgba(242, 210, 29, 0.3);
+}
+
+.student.revealed .student-watermark {
+  filter: brightness(0);
+  opacity: 0.14;
 }
 
 /* ==========================================================================
@@ -1060,14 +1119,15 @@ h1, h2, h3, h4 {
 }
 
 .plan h3 {
-  font-size: clamp(30px, 3.8vw, 48px);
-  line-height: 1.05;
-  margin: 0 0 24px;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.1;
+  margin: 0 0 18px;
+  min-height: 64px;
 }
 
 .plan ul {
   padding: 0;
-  margin: 0 0 28px;
+  margin: 0 0 20px;
   list-style: none;
   display: grid;
   gap: 14px;
@@ -1087,36 +1147,37 @@ h1, h2, h3, h4 {
   flex-shrink: 0;
 }
 
+/* Issue #17 — Reduced vertical distance between price and action button */
 .price {
-  font-family: 'Oswald', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
-  font-size: clamp(48px, 5.5vw, 68px);
+  font-size: clamp(44px, 5vw, 60px);
   line-height: 1;
-  margin: 24px 0 24px;
+  margin: 16px 0 20px;
 }
 
 .price sup {
-  font-family: 'Oswald', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 500;
-  font-size: clamp(22px, 2.5vw, 28px);
+  font-size: clamp(20px, 2.2vw, 26px);
   vertical-align: top;
   margin-right: 2px;
 }
 
 .price small {
   display: block;
-  font-family: 'Manrope', sans-serif;
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  margin-top: 8px;
+  margin-top: 6px;
   color: inherit;
   opacity: 0.75;
 }
 
 .student-intro {
-  color: #c1bfb7;
+  color: var(--text-muted-dark);
   font-size: 14px;
   margin: -10px 0 20px;
 }
@@ -1133,8 +1194,8 @@ h1, h2, h3, h4 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1149,21 +1210,52 @@ h1, h2, h3, h4 {
   line-height: 1.55;
 }
 
-.student form {
+/* Issue #21 — Increased form field vertical spacing & breathing room */
+.plan-form-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.student-fields-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 18px 14px;
+}
+
+.plan-btn {
+  margin-top: 24px;
+  width: 100%;
+}
+
+.reveal-content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.reveal-bottom-actions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 }
 
 .student label {
-  font-size: 11px;
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: #c1bfb7;
+  color: var(--text-muted-dark);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .student input {
@@ -1296,6 +1388,13 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
+.student.revealed .eyebrow,
+.student.revealed .reveal h3,
+.student.revealed .reveal .spark,
+.student.revealed .reveal .price {
+  color: var(--ink) !important;
+}
+
 .reset {
   display: inline-block;
   margin: 18px auto 0;
@@ -1304,13 +1403,22 @@ h1, h2, h3, h4 {
   color: #bbb8ac;
   text-decoration: underline;
   cursor: pointer;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-sans);
   font-size: 12px;
   padding: 6px 12px;
 }
 
+.student.revealed .reset {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .reset:hover {
   color: #fff;
+}
+
+.student.revealed .reset:hover {
+  color: #000;
 }
 
 /* Teams Section */
@@ -1968,16 +2076,16 @@ h1, h2, h3, h4 {
 }
 
 .contact-phone-link {
-  font-size: 14px;
-  color: #fff;
+  font-size: var(--fs-base);
+  color: var(--yellow);
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   transition: color 0.2s ease;
 }
 
 .contact-phone-link:hover {
-  color: var(--yellow);
-  text-decoration: underline;
+  color: var(--yellow-hover);
 }
 
 .phone-dot-sep {
@@ -1988,15 +2096,14 @@ h1, h2, h3, h4 {
 .map-column {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
   width: 100%;
-  height: 100%;
-  min-height: 440px;
 }
 
 .map-card {
   width: 100%;
-  height: 100%;
-  min-height: 440px;
+  height: 400px;
   position: relative;
   border-radius: 14px;
   overflow: hidden;
@@ -2008,29 +2115,25 @@ h1, h2, h3, h4 {
 .map-card iframe {
   width: 100%;
   height: 100%;
-  min-height: 440px;
   border: none;
   filter: grayscale(1) contrast(0.92);
 }
 
+/* Issue #29 — Map link button placed outside map container */
 .map-link {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
+  position: static;
   background: var(--yellow);
   color: var(--ink);
-  padding: 12px 18px;
+  padding: 12px 20px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.03em;
   border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   transition: background 0.2s, transform 0.2s;
-  z-index: 2;
 }
 
 .map-link:hover {
